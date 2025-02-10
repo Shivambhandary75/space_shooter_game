@@ -10,18 +10,27 @@ icon=pygame.image.load("game_icon.png")
 pygame.display.set_icon(icon)
 background = pygame.image.load('background.jpg')
 # pygame.display.
-player_img = pygame.image.load('spaceship.png')
+spaceship_img = pygame.image.load('spaceship.png')
 
 # Player Position,Centering the spaceship
-playerX = 370
-playerY = 520
-
+spaceshipX = 370
+spaceshipY = 520
+changeX=0
 running=True
 while running:
 
     for event in pygame.event.get():
-        if event.type==pygame.QUIT:
+        if event.type==pygame.QUIT:#to close the window
             running=False
+        if event.type==pygame.KEYDOWN: # when a key is pressed
+            if event.key == pygame.K_LEFT: # ship moves left withe left key
+                changeX = -1
+            if event.key == pygame.K_RIGHT: # ship moves right  with right  key
+                changeX = 1
+        if event.type==pygame.KEYUP:#when a key is released  no change is position stay there
+            changeX=0
+
+    spaceshipX+=changeX#reflect the change
     screen.blit(background, (0, 0))
-    screen.blit(player_img,(playerX, playerY))
+    screen.blit(spaceship_img,(spaceshipX, spaceshipY))
     pygame.display.update()
