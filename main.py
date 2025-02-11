@@ -31,6 +31,12 @@ while running:
             changeX=0
 
     spaceshipX+=changeX#reflect the change
+    
+    if spaceshipX<=0: #To prevent the spaceship to go out of the screen
+        spaceshipX=0
+    elif spaceshipX>=736: #screensize - size of spaceship
+        spaceshipX=736   
+    
     screen.blit(background, (0, 0))
     screen.blit(spaceship_img,(spaceshipX, spaceshipY))
     pygame.display.update()
