@@ -3,27 +3,36 @@ pygame.init()
 
 
 #screen setup
-screen=pygame.display.set_mode((800,600))
+#window  size and is resizable now
+screen=pygame.display.set_mode((800,600),pygame.RESIZABLE)
 pygame.display.set_caption("SPACE SHOOTER SAGA")
 icon=pygame.image.load("game_icon.png")
 pygame.display.set_icon(icon)
 background = pygame.image.load('background.jpg')
-playerimg = pygame.image.load('spaceship.png')
+# pygame.display.
+spaceship_img = pygame.image.load('spaceship.png')
 
 # Player Position,Centering the spaceship
-playerX = 370
-playerY = 480
-
-def player(x, y):
-    screen.blit(playerimg,(x, y))
-
+spaceshipX = 370
+spaceshipY = 520
+changeX=0
 running=True
 while running:
-    screen.blit(background,(0,0))
 
     for event in pygame.event.get():
-        if event.type==pygame.QUIT:
+        if event.type==pygame.QUIT:#to close the window
             running=False
+        if event.type==pygame.KEYDOWN: # when a key is pressed
+            if event.key == pygame.K_LEFT: # ship moves left withe left key
+                changeX = -1
+            if event.key == pygame.K_RIGHT: # ship moves right  with right  key
+                changeX = 1
+        if event.type==pygame.KEYUP:#when a key is released  no change is position stay there
+            changeX=0
 
-    player(playerX, playerY)
+    spaceshipX+=changeX#reflect the change
+    screen.blit(background, (0, 0))
+    screen.blit(spaceship_img,(spaceshipX, spaceshipY))
     pygame.display.update()
+    
+    
