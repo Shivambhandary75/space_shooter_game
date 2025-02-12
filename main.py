@@ -20,17 +20,22 @@ running=True
 while running:
 
     for event in pygame.event.get():
-        if event.type==pygame.QUIT:#to close the window
+        if event.type==pygame.QUIT: #to close the window
             running=False
         if event.type==pygame.KEYDOWN: # when a key is pressed
             if event.key == pygame.K_LEFT: # ship moves left withe left key
-                changeX = -1
+                changeX = -0.5
             if event.key == pygame.K_RIGHT: # ship moves right  with right  key
                 changeX = 1
         if event.type==pygame.KEYUP:#when a key is released  no change is position stay there
             changeX=0
 
     spaceshipX+=changeX#reflect the change
+    if(spaceshipX<=0): #prevent it from going out of screen from left
+        spaceshipX=0
+    elif (spaceshipX >= 736):  # prevent it from going out of screen from right
+        spaceshipX = 736
+
     screen.blit(background, (0, 0))
     screen.blit(spaceship_img,(spaceshipX, spaceshipY))
     pygame.display.update()
