@@ -36,6 +36,6 @@ while running:
     elif (spaceshipX >= 736):  # prevent it from going out of screen from right
         spaceshipX = 736
 
-    screen.blit(background, (0, 0))
-    screen.blit(spaceship_img,(spaceshipX, spaceshipY))
-    pygame.display.update()
+    screen.blit(background, (0, 0))#diplay bg
+    screen.blit(spaceship_img,(spaceshipX, spaceshipY))#display ship
+    pygame.display.update()#update the change
