@@ -39,7 +39,12 @@ def gameover():
     screen.fill((0, 0, 0))  # Clear the screen before displaying game over
     img_gameover = font_gameover.render('GAME OVER', True, 'white')
     screen.blit(img_gameover, (220, 250))
-    pygame.display.update()  
+    pygame.display.update()
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT or event.type == pygame.KEYDOWN:
+                pygame.quit()
+                exit()
     
 for i in range(no_of_aliens):  #display multiple aliens
     alien_soldier_img.append(pygame.image.load('alien_solider_ship.png'))
@@ -69,7 +74,8 @@ def display_score():  #defining function for showing score
    
 while running:
     if not game_over_flag:
-        screen.blit(background, (0, 0))#display background
+        screen.blit(background, (0, 0))
+        #display background
     
     for event in pygame.event.get():
         if event.type==pygame.QUIT: #to close the window
@@ -110,6 +116,7 @@ while running:
         for i in range(no_of_aliens):
             if alien_soldier_position_y[i] > 420:
                 gameover()
+
                 for j in range(no_of_aliens):
                     alien_soldier_position_y[j] = 2000                #to disappear the alien when game get over
                 break   
