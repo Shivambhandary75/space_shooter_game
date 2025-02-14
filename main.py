@@ -12,15 +12,14 @@ pygame.display.set_icon(icon)
 background = pygame.image.load('background.jpg')
 # pygame.display.
 spaceship_img = pygame.image.load('spaceship.png')
-<<<<<<< HEAD
+
 #soldier aliens
 alien_soldier_img = pygame.image.load('alien_solider_ship.png')
 alien_soldier_position_x=random.randint(0,736)
 alien_soldier_position_y=random.randint(30,150)
 alien_soldier_speed_x=0.20# alien soldier speed
-=======
 
->>>>>>> dbdadaa5f452842d288a210fd2a6a9d1931bd4cc
+
 # Player Position,Centering the spaceship
 spaceshipX = 370
 spaceshipY = 520
@@ -29,26 +28,26 @@ running=True
 while running:
 
     for event in pygame.event.get():
-<<<<<<< HEAD
+
         if event.type==pygame.QUIT: #to close the window
             running=False
         if event.type==pygame.KEYDOWN: # when a key is pressed
             if event.key == pygame.K_LEFT: # ship moves left withe left key
                 changeX = -0.5
-=======
+
         if event.type==pygame.QUIT:#to close the window
             running=False
         if event.type==pygame.KEYDOWN: # when a key is pressed
             if event.key == pygame.K_LEFT: # ship moves left withe left key
                 changeX = -1
->>>>>>> dbdadaa5f452842d288a210fd2a6a9d1931bd4cc
+
             if event.key == pygame.K_RIGHT: # ship moves right  with right  key
                 changeX = 1
         if event.type==pygame.KEYUP:#when a key is released  no change is position stay there
             changeX=0
 
     spaceshipX+=changeX#reflect the change
-<<<<<<< HEAD
+    
     if(spaceshipX<=0): #prevent it from going out of screen from left
         spaceshipX=0
     elif (spaceshipX >= 736):  # prevent it from going out of screen from right
@@ -63,7 +62,7 @@ while running:
     screen.blit(spaceship_img,(spaceshipX, spaceshipY))#display ship
     screen.blit( alien_soldier_img, (alien_soldier_position_x,alien_soldier_position_y))#display soldier aline
     pygame.display.update()#update the change
-=======
+
     
     if spaceshipX<=0: #To prevent the spaceship to go out of the screen
         spaceshipX=0
@@ -75,4 +74,4 @@ while running:
     pygame.display.update()
     
     
->>>>>>> dbdadaa5f452842d288a210fd2a6a9d1931bd4cc
+
