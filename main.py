@@ -1,12 +1,18 @@
 import pygame
 import random
 import math
+import numpy
+import cv2
 pygame.init()
 
 
 #screen setup
 #window  size and is resizable now
-screen=pygame.display.set_mode((800,600),pygame.RESIZABLE)
+WIDTH=800
+HEIGHT=600
+screen=pygame.display.set_mode((WIDTH,HEIGHT))
+#background video
+video=cv2.VideoCapture("game_background_video.mp4")
 pygame.display.set_caption("SPACE SHOOTER SAGA")
 icon=pygame.image.load("game_icon.png")
 pygame.display.set_icon(icon)
@@ -18,10 +24,10 @@ spaceship_img = pygame.image.load('spaceship.png')
 alien_soldier_img = []
 alien_soldier_position_x = []
 alien_soldier_position_y = []
-alien_soldier_speed_x = []
-alien_soldier_speed_y = []
+alien_soldier_speed_x = [0.5]
+alien_soldier_speed_y = [0.5]
 
-no_of_aliens = 6
+no_of_aliens = 7
 
 game_over_flag = False
 
@@ -48,11 +54,10 @@ score=0
 spaceshipX = 370
 spaceshipY = 520
 changeX=0
-
 # Bullet position
-bullet_img = pygame.image.load('bullet.png')
+bullet_img = pygame.image.load('spaceship_laser.png')
 bullets = []
-bullet_speed = -1
+bullet_speed = -2.5
 
 running=True
 
@@ -69,18 +74,32 @@ while running:
     for event in pygame.event.get():
         if event.type==pygame.QUIT: #to close the window
             running=False
+        if event.type == pygame.KEYDOWN:  # when a key is pressed
+            if event.key == pygame.K_F11:  # for fullscreen mode
+                screen = pygame.display.set_mode((WIDTH, HEIGHT), pygame.FULLSCREEN)
+            if event.key == pygame.K_ESCAPE:  # for default mode
+                screen = pygame.display.set_mode((WIDTH, HEIGHT))
         if event.type==pygame.KEYDOWN: # when a key is pressed
-            if event.key == pygame.K_LEFT: # ship moves left with the left key
-                changeX = -0.5
-            if event.key == pygame.K_RIGHT: # ship moves right with the right key
-                changeX = 0.5
+            if event.key in [pygame.K_LEFT,pygame.K_a]: # ship moves left with the left key
+                changeX = -2.5
+            if event.key in [pygame.K_RIGHT,pygame.K_d]: # ship moves right with the right key
+                changeX = 2.5
             if event.key == pygame.K_SPACE and not game_over_flag:
                 bullets.append([spaceshipX + 16, spaceshipY])
         
         if event.type==pygame.KEYUP:#when a key is released, no change in position
-            if event.key in [pygame.K_LEFT, pygame.K_RIGHT]:
+            if event.key in [pygame.K_LEFT, pygame.K_RIGHT,pygame.K_a,pygame.K_d,]:
                 changeX=0
-
+    read_frame_status, frame = video.read()#checks and returns if a frame is read and its contents
+    if not read_frame_status:  # If video reaches the end
+        video.set(cv2.CAP_PROP_POS_FRAMES, 0)  # Restart from the beginning
+        read_frame_status, frame = video.read()  # Read the first frame again
+    # Convert OpenCV frame (BGR to RGB)
+    frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+    frame = cv2.resize(frame, (WIDTH, HEIGHT))  # Resize to fit screen
+    frame = numpy.rot90(frame)  # Rotate if needed
+    frame = pygame.surfarray.make_surface(frame)  # Convert to Pygame surface
+    screen.blit(frame, (0, 0))
     if not game_over_flag:
         spaceshipX+=changeX#reflect the change
         if(spaceshipX<=0): #prevent it from going out of screen from left
@@ -96,10 +115,10 @@ while running:
                 break   
             alien_soldier_position_x[i]+=alien_soldier_speed_x[i]
             if alien_soldier_position_x[i]<=0:
-                alien_soldier_speed_x[i]=0.20
+                alien_soldier_speed_x[i]=1
                 alien_soldier_position_y[i]+=alien_soldier_speed_y[i]  #alien moves downwards when it touches edge
             elif alien_soldier_position_x[i]>=736:
-                alien_soldier_speed_x[i]=-0.20
+                alien_soldier_speed_x[i]=-1
                 alien_soldier_position_y[i]+=alien_soldier_speed_y[i]  #alien moves downwards when it touches edge
             
             screen.blit(alien_soldier_img[i], (alien_soldier_position_x[i],alien_soldier_position_y[i]))#display soldier alien
@@ -127,3 +146,4 @@ while running:
         display_score()
     
     pygame.display.update()#update the change
+video.release()
