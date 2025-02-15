@@ -65,6 +65,37 @@ game_over_flag = False
 
 font_gameover = pygame.font.SysFont('Arial', 64, 'bold')
 
+def show_start_screen():
+    screen.fill((0, 0, 0))  # Clear screen with black
+    font = pygame.font.SysFont('Arial', 48, 'bold')
+    title_text = font.render("Space Shooter", True, (255, 255, 255))
+    title_rect = title_text.get_rect(center=(WIDTH // 2, HEIGHT // 3))
+    button_width, button_height = 200, 60
+    button_x, button_y = (WIDTH - button_width) // 2, HEIGHT // 2
+    button_rect = pygame.Rect(button_x, button_y, button_width, button_height)
+
+    # Button for start the game
+    button_font = pygame.font.SysFont('Arial', 36, 'bold')
+    button_text = button_font.render("Start Game", True, (0, 0, 0))
+    button_text_rect = button_text.get_rect(center=button_rect.center)
+    screen.blit(title_text, title_rect)
+    pygame.draw.rect(screen, (255, 255, 0), button_rect)  # Yellow button
+    screen.blit(button_text, button_text_rect)
+
+    pygame.display.flip()
+
+    # Wait for button click to start the game
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                exit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                mouse_x, mouse_y = pygame.mouse.get_pos()
+                if button_rect.collidepoint(mouse_x, mouse_y):  # If clicked on button
+                    return True  
+
+
 
 def draw_boss_health_bar(x, y, health):
     bar_width = 100  # Total width of health bar
@@ -126,7 +157,6 @@ bullet_img = pygame.image.load('spaceship_laser.png')
 bullets = []
 bullet_speed = -2.5
 
-running = True
 
 font = pygame.font.SysFont('Arial', 32, 'bold')
 
@@ -135,7 +165,8 @@ def display_score():  # defining function for showing score
     img = font.render(f'score:{score}', True, 'white')
     screen.blit(img, (10, 10))
 
-
+if show_start_screen():  
+    running = True
 while running:
     if not game_over_flag:
         screen.blit(background, (0, 0))
