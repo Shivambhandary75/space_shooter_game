@@ -67,17 +67,30 @@ font_gameover = pygame.font.SysFont('Arial', 64, 'bold')
 
 def show_start_screen():
     screen.fill((0, 0, 0))  # Clear screen with black
+    
+     # Load and scale background image
+    background = pygame.image.load("Hero.jpg")
+    background = pygame.transform.scale(background, (WIDTH, HEIGHT))  # Resize to screen dimensions
+    screen.blit(background, (0, 0))
+    
+    
     font = pygame.font.SysFont('Arial', 48, 'bold')
-    title_text = font.render("Space Shooter", True, (255, 255, 255))
+    title_text = font.render("Space Shooter", True, (118, 38, 145))
     title_rect = title_text.get_rect(center=(WIDTH // 2, HEIGHT // 3))
     button_width, button_height = 200, 60
-    button_x, button_y = (WIDTH - button_width) // 2, HEIGHT // 2
+    button_x, button_y = (WIDTH - button_width) // 2, HEIGHT // 2.3
     button_rect = pygame.Rect(button_x, button_y, button_width, button_height)
+    
+    spaceship_top = pygame.image.load("spaceship.png")  # Load the spaceship
+    spaceship_top = pygame.transform.scale(spaceship_top, (100, 100))  # Resize if needed
+    spaceship_rect = spaceship_top.get_rect(center=(800 // 2, 600 // 5)) 
 
     # Button for start the game
+    
     button_font = pygame.font.SysFont('Arial', 36, 'bold')
     button_text = button_font.render("Start Game", True, (0, 0, 0))
     button_text_rect = button_text.get_rect(center=button_rect.center)
+    screen.blit(spaceship_top, spaceship_rect.topleft) 
     screen.blit(title_text, title_rect)
     pygame.draw.rect(screen, (255, 255, 0), button_rect)  # Yellow button
     screen.blit(button_text, button_text_rect)
@@ -119,7 +132,28 @@ def gameover():  # game_over_function
     mixer.music.load("gameover_bgm.mp3")  # game_over music
     mixer.music.play(-1)
     img_gameover = font_gameover.render('GAME OVER', True, 'white')
-    screen.blit(img_gameover, (220, 250))
+    screen.blit(img_gameover, (245, 250))
+    
+    
+      # Display obtained score
+    score_font = pygame.font.SysFont('Arial', 50, 'bold')
+    score_text = score_font.render(f"Score: {score}", True, (255, 255, 0))  # Yellow color
+    score_x, score_y = (WIDTH - score_text.get_width()) // 2, HEIGHT // 5  # Slightly above center
+    screen.blit(score_text, (score_x, score_y))
+ 
+    # Restart button
+    button_font = pygame.font.SysFont('Arial', 36, 'bold')
+    button_width, button_height = 200, 60
+    button_x, button_y = (WIDTH - button_width) // 2, HEIGHT // 1.6  # Lower position
+
+    button_rect = pygame.Rect(button_x, button_y, button_width, button_height)
+    pygame.draw.rect(screen, (255, 0, 0), button_rect)  # Red button
+
+    button_text = button_font.render("Restart", True, (255, 255, 255))
+    screen.blit(button_text, button_text.get_rect(center=button_rect.center))
+    
+    
+    
     pygame.display.update()
     while True:
         for event in pygame.event.get():
