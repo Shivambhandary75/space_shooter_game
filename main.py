@@ -75,7 +75,7 @@ def show_start_screen():
     
     
     font = pygame.font.SysFont('Arial', 48, 'bold')
-    title_text = font.render("Space Shooter", True, (118, 38, 145))
+    title_text = font.render("SPACE SHOOTER SAGA", True, (118, 38, 145))
     title_rect = title_text.get_rect(center=(WIDTH // 2, HEIGHT // 3))
     button_width, button_height = 200, 60
     button_x, button_y = (WIDTH - button_width) // 2, HEIGHT // 2.3
@@ -125,41 +125,60 @@ def draw_boss_health_bar(x, y, health):
     pygame.draw.rect(screen, (0, 255, 0), (x, y - 20, green_bar_width, bar_height))
 
 
-def gameover():  # game_over_function
+
+font_gameover = pygame.font.Font(None, 150)  # Large bold font for "GAME OVER"
+font_score = pygame.font.Font(None, 50)  # ✅ Defined before use
+font_button = pygame.font.Font(None, 40)  
+
+
+
+def gameover():
     global game_over_flag
+    
+    # Clear the screen first
+    screen.fill((0, 0, 0))  
+    
+    # Load and display background
+    background = pygame.image.load("endbackground.jpg")
+    background = pygame.transform.scale(background, (WIDTH, HEIGHT))  # Resize to screen dimensions
+    screen.blit(background, (0, 0))  # Now blit after clearing the screen
+
     game_over_flag = True
-    screen.fill((0, 0, 0))  # Clear the screen before displaying game over
-    mixer.music.load("gameover_bgm.mp3")  # game_over music
+    mixer.music.load("gameover_bgm.mp3")  # Play game over music
     mixer.music.play(-1)
-    img_gameover = font_gameover.render('GAME OVER', True, 'white')
-    screen.blit(img_gameover, (245, 250))
     
+    # Display GAME OVER text
+    img_gameover = font_gameover.render("GAME OVER", True, (255, 255, 255))  # Orange color
+    screen.blit(img_gameover, (WIDTH//2 - img_gameover.get_width()//2, HEIGHT//3))
     
-      # Display obtained score
-    score_font = pygame.font.SysFont('Arial', 50, 'bold')
-    score_text = score_font.render(f"Score: {score}", True, (255, 255, 0))  # Yellow color
-    score_x, score_y = (WIDTH - score_text.get_width()) // 2, HEIGHT // 5  # Slightly above center
-    screen.blit(score_text, (score_x, score_y))
- 
+    # Display obtained score
+    score_text = font_score.render(f"Score: {score}", True, (255, 255, 0))  # Yellow
+    screen.blit(score_text, (WIDTH//2 - score_text.get_width()//2, HEIGHT//5))
+    
     # Restart button
-    button_font = pygame.font.SysFont('Arial', 36, 'bold')
     button_width, button_height = 200, 60
-    button_x, button_y = (WIDTH - button_width) // 2, HEIGHT // 1.6  # Lower position
+    button_x, button_y = (WIDTH - button_width) // 2, HEIGHT // 1.6  
 
     button_rect = pygame.Rect(button_x, button_y, button_width, button_height)
-    pygame.draw.rect(screen, (255, 0, 0), button_rect)  # Red button
-
-    button_text = button_font.render("Restart", True, (255, 255, 255))
+    pygame.draw.rect(screen, (200, 0, 0), button_rect, border_radius=10)  # Red button with rounded corners
+    # Button glow effect
+    pygame.draw.rect(screen, (255, 50, 50), button_rect, 3, border_radius=10)
+    button_text = font_button.render("Restart", True, (255, 255, 255))
     screen.blit(button_text, button_text.get_rect(center=button_rect.center))
-    
-    
-    
-    pygame.display.update()
+
+    pygame.display.update()  # Ensure updates are reflected on the screen
+
+    # Wait for player input
     while True:
         for event in pygame.event.get():
-            if event.type == pygame.QUIT or event.type == pygame.KEYDOWN:
+            if event.type == pygame.QUIT:
                 pygame.quit()
                 exit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                mouse_x, mouse_y = pygame.mouse.get_pos()
+                if button_rect.collidepoint(mouse_x, mouse_y):  # Restart the game
+                    restart_game()
+                    return  # Exit the gameover function
 
 
 for i in range(no_of_aliens):  # display multiple aliens
@@ -193,6 +212,25 @@ bullet_speed = -2.5
 
 
 font = pygame.font.SysFont('Arial', 32, 'bold')
+
+
+def restart_game():
+    """ Reset game variables to restart the game """
+    global game_over_flag, score, spaceshipX, spaceshipY, bullets, alien_soldier_position_x, alien_soldier_position_y
+    
+    game_over_flag = False
+    score = 0
+    spaceshipX = 370
+    spaceshipY = 520
+    bullets = []
+
+    # Reset alien positions
+    for i in range(no_of_aliens):
+        alien_soldier_position_x[i] = random.randint(0, 736)
+        alien_soldier_position_y[i] = random.randint(30, 150)
+
+    mixer.music.load("game_bgm.mp3")  # Restart background music
+    mixer.music.play(-1)
 
 
 def display_score():  # defining function for showing score
