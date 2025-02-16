@@ -160,7 +160,11 @@ def gameover():  # game_over_function
             if event.type == pygame.QUIT or event.type == pygame.KEYDOWN:
                 pygame.quit()
                 exit()
-
+            if event.type == pygame.MOUSEBUTTONDOWN:  #function for button
+                mouse_x, mouse_y = pygame.mouse.get_pos()
+                if button_rect.collidepoint(mouse_x, mouse_y):  # Restart the game
+                    restart_game()
+                    return 
 
 for i in range(no_of_aliens):  # display multiple aliens
     alien_soldier_img.append(pygame.image.load('alien_solider_ship.png'))
@@ -193,6 +197,25 @@ bullet_speed = -2.5
 
 
 font = pygame.font.SysFont('Arial', 32, 'bold')
+
+
+def restart_game():
+    """ Reset game variables to restart the game """
+    global game_over_flag, score, spaceshipX, spaceshipY, bullets, alien_soldier_position_x, alien_soldier_position_y
+    
+    game_over_flag = False
+    score = 0
+    spaceshipX = 370
+    spaceshipY = 520
+    bullets = []
+
+    # Reset alien positions
+    for i in range(no_of_aliens):
+        alien_soldier_position_x[i] = random.randint(0, 736)
+        alien_soldier_position_y[i] = random.randint(30, 150)
+
+    mixer.music.load("game_bgm.mp3")  # Restart background music
+    mixer.music.play(-1)
 
 
 def display_score():  # defining function for showing score
