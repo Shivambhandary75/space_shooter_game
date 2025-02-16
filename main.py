@@ -14,6 +14,7 @@ mixer.music.load("game_bgm.mp3")  # background game music
 mixer.music.play(-1)
 # screen setup
 # window  size and is resizable now
+
 WIDTH = 800
 HEIGHT = 600
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
@@ -22,7 +23,7 @@ video = cv2.VideoCapture("game_background_video.mp4")
 pygame.display.set_caption("SPACE SHOOTER SAGA")
 icon = pygame.image.load("game_icon.png")
 pygame.display.set_icon(icon)
-background = pygame.image.load('background.jpg')
+background = pygame.image.load('start_screen_background_img.jpg')
 # pygame.display.
 spaceship_img = pygame.image.load('spaceship.png')
 # alien_death_explosion
@@ -69,7 +70,7 @@ def show_start_screen():
     screen.fill((0, 0, 0))  # Clear screen with black
     
      # Load and scale background image
-    background = pygame.image.load("Hero.jpg")
+    background = pygame.image.load("start_screen_background_img.jpg")
     background = pygame.transform.scale(background, (WIDTH, HEIGHT))  # Resize to screen dimensions
     screen.blit(background, (0, 0))
     
@@ -134,12 +135,13 @@ font_button = pygame.font.Font(None, 40)
 
 def gameover():
     global game_over_flag
+
     
     # Clear the screen first
     screen.fill((0, 0, 0))  
     
     # Load and display background
-    background = pygame.image.load("endbackground.jpg")
+    background = pygame.image.load("game_over_bg_img.jpg")
     background = pygame.transform.scale(background, (WIDTH, HEIGHT))  # Resize to screen dimensions
     screen.blit(background, (0, 0))  # Now blit after clearing the screen
 
@@ -177,6 +179,7 @@ def gameover():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 mouse_x, mouse_y = pygame.mouse.get_pos()
                 if button_rect.collidepoint(mouse_x, mouse_y):  # Restart the game
+
                     restart_game()
                     return  # Exit the gameover function
 
@@ -217,18 +220,28 @@ font = pygame.font.SysFont('Arial', 32, 'bold')
 def restart_game():
     """ Reset game variables to restart the game """
     global game_over_flag, score, spaceshipX, spaceshipY, bullets, alien_soldier_position_x, alien_soldier_position_y
-    
+    # global no_of_boss_aliens, alien_boss_position_x, alien_boss_position_y, alien_boss_speed_x, alien_boss_speed_y
+    # global boss_health
     game_over_flag = False
     score = 0
     spaceshipX = 370
     spaceshipY = 520
     bullets = []
-
+    # # Reset boss aliens
+    # no_of_boss_aliens = 1 # Remove existing boss aliens
+    # alien_boss_position_x= [random.randint(0,736)]
+    # alien_boss_position_y = [random.randint(30,150)]
+    # alien_boss_speed_x = [2.5]
+    # alien_boss_speed_y = [40]
+    # boss_health = 100  # Reset boss health
     # Reset alien positions
     for i in range(no_of_aliens):
         alien_soldier_position_x[i] = random.randint(0, 736)
         alien_soldier_position_y[i] = random.randint(30, 150)
 
+    # for i in range(no_of_boss_aliens):
+    #     alien_boss_position_x[i] = random.randint(0, 736)
+    #     alien_boss_position_y[i] = random.randint(30, 150)
     mixer.music.load("game_bgm.mp3")  # Restart background music
     mixer.music.play(-1)
 
@@ -326,6 +339,10 @@ while running:
             for i in range(no_of_boss_aliens):
                 if alien_boss_position_y[i] > 470:
                     gameover()
+
+
+
+
 
                     for j in range(no_of_boss_aliens):
                         alien_boss_position_y[j] = 2000  # to disappear the alien when game get over
