@@ -1,2 +1,10 @@
 #ignored IDE files
 .idea/
+#ignored dist dir
+dist/
+#ignored build
+build/
+#ignored main.exe
+src/main.exe
+#ignored .spec
+main.spec
