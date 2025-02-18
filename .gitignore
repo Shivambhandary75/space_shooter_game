@@ -8,3 +8,6 @@ build/
 src/main.exe
 #ignored .spec
 main.spec
+
+#ignore the zip file
+src/main.zip
