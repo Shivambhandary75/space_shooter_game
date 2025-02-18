@@ -11,7 +11,7 @@ def run_game():
     pygame.init()
     mixer.init()
 
-    mixer.music.load("../assets/audios/game_bgm.mp3")  # background game music
+    mixer.music.load("assets/audios/game_bgm.mp3")  # background game music
     mixer.music.play(-1)
     # screen setup
     # window  size and is resizable now
@@ -20,23 +20,23 @@ def run_game():
     HEIGHT = 600
     screen = pygame.display.set_mode((WIDTH, HEIGHT))
     # background video
-    video = cv2.VideoCapture("../assets/videos/game_background_video.mp4")
+    video = cv2.VideoCapture("assets/videos/game_background_video.mp4")
     pygame.display.set_caption("SPACE SHOOTER SAGA")
-    icon = pygame.image.load("../assets/images/game_icon.png")
+    icon = pygame.image.load("assets/images/game_icon.png")
     pygame.display.set_icon(icon)
-    background = pygame.image.load('../assets/images/start_screen_background_img.jpg')
+    background = pygame.image.load('assets/images/start_screen_background_img.jpg')
     # pygame.display.
-    spaceship_img = pygame.image.load('../assets/images/spaceship.png')
+    spaceship_img = pygame.image.load('assets/images/spaceship.png')
     # alien_death_explosion
-    alien_soldier_death_img = pygame.image.load("../assets/images/alien_soldier_death_image.png")
+    alien_soldier_death_img = pygame.image.load("assets/images/alien_soldier_death_image.png")
     soldier_explosion = []
     # alien_death_explosion
-    alien_monster_death_img = pygame.image.load("../assets/images/alien_monster_death_image.png")
+    alien_monster_death_img = pygame.image.load("assets/images/alien_monster_death_image.png")
     monster_explosion = []
     # boss_alien explosion
-    alien_boss_ship_img = pygame.image.load("../assets/images/alien_boss_ship.png")
+    alien_boss_ship_img = pygame.image.load("assets/images/alien_boss_ship.png")
     scaled_boss_ship_img = pygame.transform.scale(alien_boss_ship_img, (100, 100))
-    alien_boss_death_img = pygame.image.load("../assets/images/alien_boss_death_image.png")
+    alien_boss_death_img = pygame.image.load("assets/images/alien_boss_death_image.png")
     scaled_boss_death_img = pygame.transform.scale(alien_boss_death_img, (100, 100))
     boss_explosion = []
     # soldier aliens
@@ -71,7 +71,7 @@ def run_game():
         screen.fill((0, 0, 0))  # Clear screen with black
 
          # Load and scale background image
-        background = pygame.image.load("../assets/images/start_screen_background_img.jpg")
+        background = pygame.image.load("assets/images/start_screen_background_img.jpg")
         background = pygame.transform.scale(background, (WIDTH, HEIGHT))  # Resize to screen dimensions
         screen.blit(background, (0, 0))
 
@@ -83,7 +83,7 @@ def run_game():
         button_x, button_y = (WIDTH - button_width) // 2, HEIGHT // 2.3
         button_rect = pygame.Rect(button_x, button_y, button_width, button_height)
 
-        spaceship_top = pygame.image.load("../assets/images/spaceship.png")  # Load the spaceship
+        spaceship_top = pygame.image.load("assets/images/spaceship.png")  # Load the spaceship
         spaceship_top = pygame.transform.scale(spaceship_top, (100, 100))  # Resize if needed
         spaceship_rect = spaceship_top.get_rect(center=(800 // 2, 600 // 5))
 
@@ -142,12 +142,12 @@ def run_game():
         screen.fill((0, 0, 0))
 
         # Load and display background
-        background = pygame.image.load("../assets/images/game_over_bg_img.jpg")
+        background = pygame.image.load("assets/images/game_over_bg_img.jpg")
         background = pygame.transform.scale(background, (WIDTH, HEIGHT))  # Resize to screen dimensions
         screen.blit(background, (0, 0))  # Now blit after clearing the screen
 
         game_over_flag = True
-        mixer.music.load("../assets/audios/gameover_bgm.mp3")  # Play game over music
+        mixer.music.load("assets/audios/gameover_bgm.mp3")  # Play game over music
         mixer.music.play(-1)
 
         # Display GAME OVER text
@@ -186,13 +186,13 @@ def run_game():
 
 
     for i in range(no_of_aliens):  # display multiple aliens
-        alien_soldier_img.append(pygame.image.load('../assets/images/alien_solider_ship.png'))
+        alien_soldier_img.append(pygame.image.load('assets/images/alien_solider_ship.png'))
         alien_soldier_position_x.append(random.randint(0, 736))
         alien_soldier_position_y.append(random.randint(30, 150))
         alien_soldier_speed_x.append(0.20)  # alien speed
         alien_soldier_speed_y.append(40)
     for i in range(no_of_monster_aliens):  # display multiple monster_aliens
-        alien_monster_img.append(pygame.image.load('../assets/images/alien_monster_image.png'))
+        alien_monster_img.append(pygame.image.load('assets/images/alien_monster_image.png'))
         alien_monster_position_x.append(random.randint(0, 736))
         alien_monster_position_y.append(random.randint(30, 150))
         alien_monster_speed_x.append(2.5)  # alien monster speed
@@ -210,7 +210,7 @@ def run_game():
     spaceshipY = 520
     changeX = 0
     # Bullet position
-    bullet_img = pygame.image.load('../assets/images/spaceship_laser.png')
+    bullet_img = pygame.image.load('assets/images/spaceship_laser.png')
     bullets = []
     bullet_speed = -2.5
 
@@ -273,7 +273,7 @@ def run_game():
                 if event.key in [pygame.K_RIGHT, pygame.K_d]:  # ship moves right with the right key
                     changeX = 2.5
                 if event.key == pygame.K_SPACE and not game_over_flag:
-                    laser_sound = mixer.Sound("../assets/audios/spaceship_laser_bgm.mp3")  # laser sound effect
+                    laser_sound = mixer.Sound("assets/audios/spaceship_laser_bgm.mp3")  # laser sound effect
                     laser_sound.play()
                     bullets.append([spaceshipX + 16, spaceshipY])  # shooting bullets
 
@@ -373,7 +373,7 @@ def run_game():
                     distance = math.sqrt(math.pow(bullet[0] - alien_soldier_position_x[i], 2) + math.pow(
                         bullet[1] - alien_soldier_position_y[i], 2))
                     if distance < 27:
-                        alien_soldier_death_sound = mixer.Sound("../assets/audios/alien_death_bgm.mp3")  # alien_soldier_death sound effect
+                        alien_soldier_death_sound = mixer.Sound("assets/audios/alien_death_bgm.mp3")  # alien_soldier_death sound effect
                         alien_soldier_death_sound.play()
 
                         soldier_explosion.append((alien_soldier_position_x[i], alien_soldier_position_y[i],
@@ -393,7 +393,7 @@ def run_game():
                             bullet[1] - alien_monster_position_y[j], 2))
                         if distance < 27:
                             alien_monster_death_sound = mixer.Sound(
-                                "../assets/audios/alien_monster_death_bgm.mp3")  # alien_soldier_death sound effect
+                                "assets/audios/alien_monster_death_bgm.mp3")  # alien_soldier_death sound effect
                             alien_monster_death_sound.play()
 
                             monster_explosion.append((alien_monster_position_x[j], alien_monster_position_y[j],
@@ -423,7 +423,7 @@ def run_game():
                             if boss_health <= 0:
 
                                 boss_explosion.append((alien_boss_position_x[k], alien_boss_position_y[k], time.time()))
-                                alien_boss_death_sound = mixer.Sound("../assets/audios/alien_boss_death_bgm.mp3")
+                                alien_boss_death_sound = mixer.Sound("assets/audios/alien_boss_death_bgm.mp3")
                                 alien_boss_death_sound.play()
                                 alien_boss_position_x[k] = random.randint(0, 736)
                                 alien_boss_position_y[k] = random.randint(30, 150)
