@@ -6,6 +6,7 @@ import math
 import numpy
 import cv2
 from pygame import mixer
+import sys
 def run_game():
     pygame.init()
     mixer.init()
@@ -103,7 +104,7 @@ def run_game():
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
-                    exit()
+                    sys.exit()
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     mouse_x, mouse_y = pygame.mouse.get_pos()
                     if button_rect.collidepoint(mouse_x, mouse_y):  # If clicked on button
@@ -175,7 +176,7 @@ def run_game():
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
-                    exit()
+                    sys.exit()
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     mouse_x, mouse_y = pygame.mouse.get_pos()
                     if button_rect.collidepoint(mouse_x, mouse_y):  # Restart the game
