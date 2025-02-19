@@ -9,4 +9,8 @@ Follow these steps to download and play the game:
 <br>4.**Select "Extract all" option to install all dependencies i.e. `main` folder.**
 <br>5.**Select desired `main` directory destination.**
 <br>6.**Open `main/main.exe` and enjoy the game.** 
-
+ ## 🕹️ Controls :
+## 🎮 Controls  
+- **A / Left Arrow** → Move Left  
+- **D / Right Arrow** → Move Right  
+- **Spacebar** → Shoot  
