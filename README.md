@@ -9,5 +9,5 @@ Follow these steps to download and play the game:
 <br>3.**After installation open** `main.zip/main.exe`**.**
 <br>4.**Select "Extract all" option to install all dependencies i.e. `main` folder.**
 <br>5.**Select desired `main` directory destination.**
-<br>6.**Open `main.exe` and enjoy the game.** 🎮🚀 
+<br>6.**Open `main/main.exe` and enjoy the game.** 🎮🚀 
 
