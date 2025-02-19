@@ -1,5 +1,5 @@
 # SPACE SHOOTER SAGA  🎮👽👾🚀
-An exciting arcade space shooter game!  
+An arcade space shooter game. 
 
 ## 🔽 Download & Install  :
 Follow these steps to download and play the game:  
