@@ -1,7 +1,7 @@
 # SPACE SHOOTER SAGA 
 An arcade space shooter game.
 
-<h1>**Download steps:**</h1><br>
+<h2>Download steps:</h2><br>
 1.CLick on the link : https://github.com/Shivambhandary75/space_shooter_game/releases/tag/v1.0.0 .<br>
 2.Install "main.zip". <br>
 3.After installation open "main.zip/main.exe".<br>
