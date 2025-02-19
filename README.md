@@ -1,5 +1,6 @@
 # SPACE SHOOTER SAGA  🎮👽👾🚀
-An arcade space shooter game. 
+## About the Game
+**SPACE SHOOTER SAGA** is an  arcade space shooter game where you must defend your territory from an alien invasion. Face different types of aliens and stop them before they reach your base. If they get through, you lose ,so destroy them first.
 
 ## 🔽 Download & Install  :
 Follow these steps to download and play the game:  
