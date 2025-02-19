@@ -1,7 +1,11 @@
 # SPACE SHOOTER SAGA  🎮👽👾🚀
 ## About the Game
 **SPACE SHOOTER SAGA** is an  arcade space shooter game where you must defend your territory from an alien invasion. Face different types of aliens and stop them before they reach your base. If they get through, you lose ,so destroy them first.
-
+## Screenshots :
+## Screenshots:
+![Game Screenshot 1](src/assets/images/startscreen_ss_img.png)
+![Game Screenshot 2](src/assets/images/gameplay_ss_img.png)
+![Game Screenshot 3](src/assets/images/gameover_ss_img.png)
 ## 🔽 Download & Install  :
 Follow these steps to download and play the game:  
 - **Click on the link:** [Download Space Shooter Saga](https://github.com/Shivambhandary75/space_shooter_game/releases/tag/v1.0.0)**.**
