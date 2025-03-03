@@ -1,5 +1,4 @@
 import time
-
 import pygame
 import random
 import math
@@ -129,7 +128,7 @@ def run_game():
 
 
     font_gameover = pygame.font.Font(None, 150)  # Large bold font for "GAME OVER"
-    font_score = pygame.font.Font(None, 50)  # ✅ Defined before use
+    font_score = pygame.font.Font(None, 50)  # Defined before use
     font_button = pygame.font.Font(None, 40)
 
 
@@ -220,33 +219,6 @@ def run_game():
 
     def restart_game():
         run_game()
-        #  Reset game variables to restart the game
-        # global game_over_flag, score, spaceshipX, spaceshipY, bullets, alien_soldier_position_x, alien_soldier_position_y
-        # # global no_of_boss_aliens, alien_boss_position_x, alien_boss_position_y, alien_boss_speed_x, alien_boss_speed_y
-        # # global boss_health
-        # game_over_flag = False
-        # score = 0
-        # spaceshipX = 370
-        # spaceshipY = 520
-        # bullets = []
-        # # # Reset boss aliens
-        # # no_of_boss_aliens = 1 # Remove existing boss aliens
-        # # alien_boss_position_x= [random.randint(0,736)]
-        # # alien_boss_position_y = [random.randint(30,150)]
-        # # alien_boss_speed_x = [2.5]
-        # # alien_boss_speed_y = [40]
-        # # boss_health = 100  # Reset boss health
-        # # Reset alien positions
-        # for i in range(no_of_aliens):
-        #     alien_soldier_position_x[i] = random.randint(0, 736)
-        #     alien_soldier_position_y[i] = random.randint(30, 150)
-        #
-        # # for i in range(no_of_boss_aliens):
-        # #     alien_boss_position_x[i] = random.randint(0, 736)
-        # #     alien_boss_position_y[i] = random.randint(30, 150)
-        # mixer.music.load("../assets/audios/game_bgm.mp3")  # Restart background music
-        # mixer.music.play(-1)
-
 
     def display_score():  # defining function for showing score
         img = font.render(f'score:{score}', True, 'white')
