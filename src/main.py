@@ -1,3 +1,4 @@
+# imported required libraries and  modules
 import time
 import pygame
 import random
@@ -6,9 +7,9 @@ import numpy
 import cv2
 from pygame import mixer
 import sys
-def run_game():
-    pygame.init()
-    mixer.init()
+def run_game():         # function definition for the game
+    pygame.init()        # game window
+    mixer.init()          # sound effects
 
     mixer.music.load("assets/audios/game_bgm.mp3")  # background game music
     mixer.music.play(-1)
@@ -66,7 +67,7 @@ def run_game():
 
     font_gameover = pygame.font.SysFont('Arial', 64, 'bold')
 
-    def show_start_screen():
+    def show_start_screen(): #  function definition for game start screen
         screen.fill((0, 0, 0))  # Clear screen with black
 
          # Load and scale background image
@@ -111,7 +112,7 @@ def run_game():
 
 
 
-    def draw_boss_health_bar(x, y, health):
+    def draw_boss_health_bar(x, y, health): # function definition for alien boss health
         bar_width = 100  # Total width of health bar
         bar_height = 10  # Height of the health bar
 
@@ -133,7 +134,7 @@ def run_game():
 
 
 
-    def gameover():
+    def gameover(): # function definition for game over screen
         global game_over_flag
 
 
@@ -213,14 +214,12 @@ def run_game():
     bullets = []
     bullet_speed = -2.5
 
-
     font = pygame.font.SysFont('Arial', 32, 'bold')
 
-
-    def restart_game():
+    def restart_game():  #function definition to start the game
         run_game()
 
-    def display_score():  # defining function for showing score
+    def display_score():  # function definition for showing score
         img = font.render(f'score:{score}', True, 'white')
         screen.blit(img, (10, 10))
 
@@ -286,7 +285,7 @@ def run_game():
 
                 screen.blit(alien_soldier_img[i],
                             (alien_soldier_position_x[i], alien_soldier_position_y[i]))  # display soldier alien
-            if (score > 10):
+            if (score > 10): # when player scores more than 10
                 # alien_monsters display and movement
                 for i in range(no_of_monster_aliens):
                     if alien_monster_position_y[i] > 470:
@@ -308,15 +307,11 @@ def run_game():
                     screen.blit(alien_monster_img[i],
                                 (alien_monster_position_x[i], alien_monster_position_y[i]))  # display soldier alien
             # boss aliens display and movement
-            if (score > 20):
+            if (score > 20): # when player scores more than 20
 
                 for i in range(no_of_boss_aliens):
                     if alien_boss_position_y[i] > 470:
                         gameover()
-
-
-
-
 
                         for j in range(no_of_boss_aliens):
                             alien_boss_position_y[j] = 2000  # to disappear the alien when game get over
@@ -359,7 +354,7 @@ def run_game():
                         alien_soldier_position_y[i] = random.randint(30, 150)
                         score += 1
                         break  # a bullet checked for hitting multiple aliens,breaks loop if one alien is hit
-                if (score > 10):
+                if (score > 10): # if player scores more than 10
                     for j in range(no_of_monster_aliens):  # if bullet hit  alien_monsters
                         distance = math.sqrt(math.pow(bullet[0] - alien_monster_position_x[j], 2) + math.pow(
                             bullet[1] - alien_monster_position_y[j], 2))
@@ -379,7 +374,8 @@ def run_game():
                             alien_monster_position_y[j] = random.randint(30, 150)
                             score += 2
                             break  # a bullet checked for hitting multiple monsters,breaks loop if one alien is hit
-                if (score > 20 or score > 40 or score > 60 or score > 80 or score > 100):
+                if (score > 20 or score > 40 or score > 60 or score > 80 or score > 100):# if player scores
+                    # more than 20 or when there is increase in his score by 20 or beyond 100
                     for k in range(no_of_boss_aliens):  # if bullet hit  alien_monsters
                         distance = math.sqrt(math.pow(bullet[0] - alien_boss_position_x[k], 2) + math.pow(
                             bullet[1] - alien_boss_position_y[k], 2))
@@ -408,14 +404,14 @@ def run_game():
             # older explosion placeholders ie alien death
             for x, y, _ in soldier_explosion:  # t is not needed as we need to draw here just
                 screen.blit(alien_soldier_death_img, (x, y))
-            if (score > 10):
+            if (score > 10): # when players scores more than 10
                 # monster explosion
                 monster_explosion = [(x, y, t) for x, y, t in monster_explosion if
                                      current_time - t < 0.5]  # Show for 0.5 seconds and keeps new deletes
                 # older explosion placeholders ie alien death
                 for x, y, _ in monster_explosion:  # t is not needed as we need to draw here just
                     screen.blit(alien_monster_death_img, (x, y))
-            if (score > 20):
+            if (score > 20): # when player scores more than 20
                 # boss explosion
                 boss_explosion = [(x, y, t) for x, y, t in boss_explosion if
                                   current_time - t < 0.5]  # Show for 0.5 seconds and keeps new deletes
@@ -429,6 +425,6 @@ def run_game():
             screen.blit(spaceship_img, (spaceshipX, spaceshipY))  # display ship
             display_score()
 
-        pygame.display.update()  # update the change
+        pygame.display.update()  # to update the changes made
     video.release()
-run_game()
+run_game() # function call to start the game
